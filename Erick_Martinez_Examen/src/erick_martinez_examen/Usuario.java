@@ -70,6 +70,16 @@ public class Usuario {
         this.password = password;
     }
 
+    public ArrayList<Proyecto> getProyecto() {
+        return proyecto;
+    }
+
+    public void setProyecto(ArrayList<Proyecto> proyecto) {
+        this.proyecto = proyecto;
+    }
+    
+    
+
     @Override
     public String toString() {
         return "Usuario{" + "nombre=" + nombre + ", edad=" + edad + ", profesion=" + profesion + ", username=" + username + ", password=" + password + '}';

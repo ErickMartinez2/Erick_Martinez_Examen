@@ -5,18 +5,30 @@
  */
 package erick_martinez_examen;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author usuario
  */
 public class Carpeta extends Archivo {
-
+    
+    static ArrayList<Archivo> archivo = new ArrayList();
+    
     public Carpeta() {
         super();
     }
-    
+
     public Carpeta(String nombre, int tamano) {
         super(nombre, tamano);
+    }
+
+    public static ArrayList<Archivo> getArchivo() {
+        return archivo;
+    }
+
+    public static void setArchivo(ArrayList<Archivo> archivo) {
+        Carpeta.archivo = archivo;
     }
     
 }
