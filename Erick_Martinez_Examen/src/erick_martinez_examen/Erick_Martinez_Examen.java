@@ -49,6 +49,7 @@ public class Erick_Martinez_Examen {
                     Usuario u = new Usuario(nombre, edad, profesion, username, password);
                     usuario.add(u);
                     System.out.println("Usuario Registrado!");
+                    System.out.println();
                     break;
                 case 2:
                     System.out.println("-> Modificar Usuario");
@@ -77,6 +78,7 @@ public class Erick_Martinez_Examen {
                             break;
                     }
                     System.out.println("Usuario Modificado!");
+                    System.out.println();
                     break;
                 case 3:
                     System.out.println("-> Eliminar Usuario");
@@ -87,18 +89,46 @@ public class Erick_Martinez_Examen {
                     int num_usuario2 = sc.nextInt();
                     usuario.remove(num_usuario2);
                     System.out.println("Usuario Eliminado!");
+                    System.out.println();
                     break;
                 case 4:
                     System.out.println("-> Listar Usuarios");
                     for (int i = 0; i < usuario.size(); i++) {
                         System.out.println("- " + usuario.get(i));
                     }
+                    System.out.println();
                     break;
                 case 5:
-                    
+                    System.out.println("-> Iniciar Sesion: ");
+                    System.out.print("Ingrese su usuario: ");
+                    String Username = sc.next();
+                    System.out.print("Ingrese la contraseña: ");
+                    String Password = sc.next();
+                    boolean correcto = false;
+                    for (int i = 0; i < usuario.size(); i++) {
+                        if (usuario.get(i).getUsername().equals(Username)) {
+                            if (usuario.get(i).getPassword().equals(Password)) {
+                                correcto = true;
+                            }
+                        }
+                    }
+                    if (correcto == false) {
+                        System.out.println("El usuario o la contraseña son incorrectos!");
+                        System.out.println();
+                    } else {
+                        System.out.println();
+                        Iniciar(Username);
+                    }
+                    System.out.println();
                     break;
             }
         } while (opcion != 6);
+    }
+    
+    public static void Iniciar(String username){
+        System.out.println("*** GitHub ***");
+        System.out.println("-> Proyectos");
+        
     }
 
 }

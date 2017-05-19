@@ -5,6 +5,8 @@
  */
 package erick_martinez_examen;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author usuario
@@ -15,6 +17,7 @@ public class Usuario {
     public String profesion;
     public String username;
     public String password;
+    public ArrayList<Proyecto> proyecto = new ArrayList();
 
     public Usuario() {
     }
