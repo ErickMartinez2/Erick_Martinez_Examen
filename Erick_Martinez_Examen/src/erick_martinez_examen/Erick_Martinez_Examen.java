@@ -168,29 +168,39 @@ public class Erick_Martinez_Examen {
                     System.out.print("Desea agregar colaboradores? [s/n]: ");
                     char resp = sc.next().charAt(0);
                     ArrayList<Integer> colaborar = new ArrayList();
-                    if (resp == 's' || resp == 'S') {
-                        char resp2;
-                        do {
-                            System.out.println("-> Usuarios");
-                            for (int i = 0; i < usuario.size(); i++) {
-                                for (int j = 0; j < colaborar.size(); j++) {
-                                    if (i != colaborar.get(i)) {
-                                        System.out.println(i + ". " + usuario.get(i));
+                    colaborar.add(num);
+                    if (usuario.size() > 1) {
+                        if (resp == 's' || resp == 'S') {
+                            char resp2 = ' ';
+                            do {
+                                if (colaborar.size() != usuario.size()) {
+                                    System.out.println("-> Usuarios");
+                                    for (int i = 0; i < usuario.size(); i++) {
+                                        if (colaborar.contains(i) == false) {
+                                            System.out.println(i + ". " + usuario.get(i));
+                                        }
                                     }
+                                    System.out.print("Ingrese el numero del usuario: ");
+                                    int num_usuario = sc.nextInt();
+                                    usuario.get(num).getProyecto().get(usuario.get(num).getProyecto().size() - 1).getColaboradores().add(usuario.get(num_usuario));
+                                    usuario.get(num_usuario).getProyecto().add(p);
+                                    System.out.print("Desea agregar otro colaborador? [s/n]: ");
+                                    resp2 = sc.next().charAt(0);
+                                    colaborar.add(num_usuario);
+                                    System.out.println();
+                                } else {
+                                    System.out.println("No hay mas colaboradores disponibles!");
+                                    System.out.println();
+                                    resp2 = 'n';
                                 }
-                            }
-                            System.out.print("Ingrese el numero del usuario: ");
-                            int num_usuario = sc.nextInt();
-                            colaborar.add(num_usuario);
-                            usuario.get(num).getProyecto().get(usuario.get(num).getProyecto().size() - 1).getColaboradores().add(usuario.get(num_usuario));
-                            usuario.get(num_usuario).getProyecto().add(p);
-                            System.out.print("Desea agregar otro colaborador? [s/n]: ");
-                            resp2 = sc.next().charAt(0);
-                        } while (resp2 == 's' || resp2 == 'S');
+                            } while (resp2 == 's' || resp2 == 'S');
+                        }
+
                     }
                     System.out.println("Proyecto Creado!");
                     System.out.println();
                     break;
+
                 case 2:
                     if (!usuario.get(num).getProyecto().isEmpty()) {
                         System.out.println("-> Modificar Proyecto");
@@ -198,8 +208,12 @@ public class Erick_Martinez_Examen {
                         int num_proyecto = sc.nextInt();
                         System.out.println();
                         System.out.println("-> Archivos");
-                        for (int i = 0; i < usuario.get(num).getProyecto().get(num_proyecto).getArchivos().size(); i++) {
-                            System.out.println(i + ". " + usuario.get(num).getProyecto().get(num_proyecto).getArchivos().get(i));
+                        if (!usuario.get(num).getProyecto().get(num_proyecto).getArchivos().isEmpty()) {
+                            for (int i = 0; i < usuario.get(num).getProyecto().get(num_proyecto).getArchivos().size(); i++) {
+                                System.out.println(i + ". " + usuario.get(num).getProyecto().get(num_proyecto).getArchivos().get(i));
+                            }
+                        } else {
+                            System.out.println("No hay archivos creados!");
                         }
                         System.out.println();
                         System.out.println("1. Crear Archivo");
@@ -232,7 +246,8 @@ public class Erick_Martinez_Examen {
                                     case 2:
                                         System.out.println();
                                         System.out.println("Ingrese el contenido del archivo de texto: ");
-                                        String contenido = sc.next();
+                                        sc.nextLine();
+                                        String contenido = sc.nextLine();
                                         Archivo at = new Archivo_Texto(contenido, Nombre, Tamano);
                                         System.out.println("Archivo de Texto Agregado!");
                                         System.out.println();
@@ -244,12 +259,23 @@ public class Erick_Martinez_Examen {
                                 System.out.print("Ingrese el nombre del archivo: ");
                                 int num_archivo = sc.nextInt();
                                 if (usuario.get(num).getProyecto().get(num_proyecto).getArchivos().get(num_archivo) instanceof Carpeta) {
-
+                                    if (usuario.get(num).getProyecto().get(num_proyecto).getArchivos().isEmpty()) {
+                                        System.out.println("No hay archivos disponibles!");
+                                    }
                                 } else {
                                     if (usuario.get(num).getProyecto().get(num_proyecto).getArchivos().get(num_archivo) instanceof Archivo_Texto) {
-
+                                        System.out.print("Desea ingresar un nuevo contenido? [s/n]: ");
+                                        char resp4 = sc.next().charAt(0);
+                                        if (resp4 == 's' || resp4 == 'S') {
+                                            System.out.println();
+                                            System.out.println("Ingrese el contenido del archivo de texto: ");
+                                            sc.nextLine();
+                                            String contenido3 = sc.nextLine();
+                                            ((Archivo_Texto) usuario.get(num).getProyecto().get(num_proyecto).getArchivos().get(num_archivo)).setContenido(contenido3);
+                                        }
                                     }
                                 }
+                                System.out.println("Archivo Modificado!");
                                 System.out.println();
                                 break;
                             case 3:
@@ -278,6 +304,8 @@ public class Erick_Martinez_Examen {
                                 }
                                 System.out.println();
                                 break;
+                            case 5:
+                                break;
                         }
                     } else {
                         System.out.println("No hay proyectos que modificar!");
@@ -290,11 +318,15 @@ public class Erick_Martinez_Examen {
                         System.out.print("Ingrese el numero del proyecto: ");
                         int num_proyecto = sc.nextInt();
                         usuario.get(num).getProyecto().remove(num_proyecto);
+                        System.out.println("Proyecto Eliminado!");
+                        System.out.println();
                     } else {
                         System.out.println("No hay proyectos que eliminar!");
+                        System.out.println();
                     }
                     break;
             }
         } while (opcion2 != 4);
     }
+
 }
